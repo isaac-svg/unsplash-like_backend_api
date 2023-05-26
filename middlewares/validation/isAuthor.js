@@ -4,8 +4,9 @@ const User = require("../../models/User");
 
  async function isAuthor (req,res,next){
 
-        const {id,username,password} = req.body;
-        if(id !== req.user.id){
+        const {username,password} = req.body;
+        const {imageId} = req.params
+        if(imageId !== req.user.id){
             return next(new ResponseError("You are not the author of this post",StatusCodes.UNAUTHORIZED))
         }
 

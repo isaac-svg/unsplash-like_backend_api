@@ -1,9 +1,9 @@
 
 
 
-async function deleteImage(){
+async function deleteImage(req,res,next){
 
-
+    const {imageId} =  req.params
 
 }
 
