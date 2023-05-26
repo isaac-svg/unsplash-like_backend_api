@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes")
 const mongoose =  require("mongoose")
 const ResponseError = require("../middlewares/error")
-
+const mongoosePaginate =  require("mongoose-paginate-v2")
 
 
 
@@ -19,6 +19,8 @@ const ImageSchema =new  mongoose.Schema({
         type:String
     }
 },{timestamps:true})
+
+ImageSchema.plugin(mongoosePaginate)
 
 ImageSchema.pre("save",function(next){
 
