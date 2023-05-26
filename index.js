@@ -11,6 +11,7 @@ const connectDB = require("./db/connect")
 // middlewares
 app.use(cors({
     credentials:true,
+    origin:process.env.ORIGIN
 }));
 app.use(express.json({limit:"50mb"}))
 app.use(bodyParser.json({limit:"50mb"}))

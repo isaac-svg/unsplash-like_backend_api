@@ -1,10 +1,17 @@
 {
   "name": "my_unsplash_api",
   "description": "api for authentication and for performing crud operaions on images",
+  "license": "ISC",
+  "engines": {
+    "node":"18.x"
+  },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
+
+    
+ 
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",

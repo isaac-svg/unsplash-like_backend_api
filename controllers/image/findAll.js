@@ -1,13 +1,11 @@
 const { StatusCodes } = require("http-status-codes");
-const mongoose = require("mongoose");
-const mongoosePaginate = require('mongoose-paginate-v2');
 const ResponseError = require("../../middlewares/error");
-const Image = require("../../models/Picture")(mongoose,mongoosePaginate);
-const getPagination = require("../../models/utils/getPagination");
+const Image = require("../../models/Picture")
+const getPagination = require("../../utils/getPagination");
 
 
 
-async function getAll (req,res,next){
+async function findAll (req,res,next){
     const {page,size,category} =  req.query
     
     try {
@@ -15,15 +13,15 @@ async function getAll (req,res,next){
         const {limit ,offset} =  getPagination(page,size)
 
        const condition =  category?{category:{$regex: new RegExp(category),$options:"i"}}:{}
-
-      Image.paginate(condition,{limit,offset}).then(data=>{
+const newImage =  Image
+      newImage.paginate(condition,{limit,offset}).then(data=>{
       return  res.status(StatusCodes.OK).json({
-            totalItems: data.totalDocs,
+            posts: data.totalDocs,
             tutorials: data.docs,
             totalPages: data.totalPages,
             currentPage: data.page - 1,
         })
-      }).then(err=>{
+      }).catch(err=>{
         res.status(500).json({success:false,message:err.message});
       })
 
@@ -34,4 +32,4 @@ async function getAll (req,res,next){
         return next(new ResponseError(error.message,500))
     }
 }
-module.exports =  getAll
+module.exports =  findAll

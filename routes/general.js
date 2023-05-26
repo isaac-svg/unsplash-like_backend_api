@@ -1,11 +1,11 @@
 
 const router =  require("express").Router()
-const getAll = require("../controllers/image/getAll")
+const findAll = require("../controllers/image/findAll")
 
 
 
 
-router.route("/all").get(getAll)
+router.route("/all").get(findAll)
 
 
 

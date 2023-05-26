@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes")
 const ResponseError = require("../../middlewares/error")
 const Image = require("../../models/Picture")
-const uploadImage = require("../../models/utils/uploadToCloud")
+const uploadImage = require("../../utils/uploadToCloud")
 
 
 

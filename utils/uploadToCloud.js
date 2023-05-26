@@ -21,13 +21,13 @@ const opts = {
     //imgage = > base64
     return new Promise((resolve, reject) => {
       cloudinary.uploader.upload(image, opts, (error, result) => {
-        console.log(result)
+        // console.log(result)
         if (result && result.secure_url) {
-          console.log(result.secure_url,"URL");
+          // console.log(result.secure_url,"URL");
           return resolve(result.secure_url);
         }
         // console.log(error.message,"");
-        return reject({ msg: error.message,src:"uploadImage" });
+        return reject({ msg: error.message });
       });
     });
   };

@@ -12,7 +12,7 @@ function verifyToken (req,res,next){
         })
     }
      jwt.verify(token,process.env.JWT_SECRET,{},(err,userData)=>{
-        console.log(userData)
+    
         
         if(err) {
             
