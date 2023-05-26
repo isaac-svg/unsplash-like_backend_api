@@ -9,7 +9,7 @@ const router =  require("express").Router()
 
 
 router.route("/create").post(verifyToken,createPost)
-router.route("/delete").post([verifyToken,isAuthor],deleteImage)
+router.route("/delete/:authorId").delete([verifyToken,isAuthor],deleteImage)
 
 
 
