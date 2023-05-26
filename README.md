@@ -18,7 +18,7 @@ Technologies and Libraries Used:
 - dotenv: A module for loading environment variables from a .env file, allowing secure configuration of sensitive information.
 
 Installation and Usage:
-1. Clone this repository: `git clone https://github.com/isaac-svg/my_unsplash_api.git`
+1. Clone this repository: `git clone https://github.com/isaac-svg/unsplash-like_backend_api.git`
 2. Install dependencies: `npm install`
 3. Configure environment variables: Create a .env file with required configurations (e.g., database URL, JWT secret, etc.).
 4. Start the server: `npm start`
