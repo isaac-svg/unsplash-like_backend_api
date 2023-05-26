@@ -46,10 +46,10 @@ UserSchema.methods.VerifyJwtToken = function (token,jwtOptions={}){
 }
 
 UserSchema.methods.SignJwtToken =  function(){
-    return jwt.sign({id: this._id,name:this.username},process.env.JWT_SECRET,{})
+    return jwt.sign({id: this._id,name:this.username,email:this.email},process.env.JWT_SECRET,{})
 }
 UserSchema.methods.isPasswordMatch = async function(password){
-return bcrypt.compare(password,this.password)
+return await  bcrypt.compare(password,this.password)
 }
 const User =  mongoose.model("User",UserSchema);
 

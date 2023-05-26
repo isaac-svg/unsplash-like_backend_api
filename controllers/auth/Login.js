@@ -2,25 +2,28 @@ const { StatusCodes } = require("http-status-codes");
 const User = require("../../models/User");
 const ResponseError = require("../../middlewares/error");
 const bcrypt =  require("bcryptjs")
-
+const jwt = require("jsonwebtoken")
 async function login (req,res,next){
 
-   const {email,password} = req.body;
-   const token =req.cookies.token
+   const {username,password} = req.body;
+  
    try {
-    if(!email || !password){
-        next(new ResponseError("Please provide username and password",StatusCodes.BAD_REQUEST))
+    if(!username || !password){
+      return  next(new ResponseError("Please provide username and password",StatusCodes.BAD_REQUEST))
     }
-    const user = await  User.findOne({email})
+    const user = await  User.findOne({username})
+    
     if(!user){
-        next(new ResponseError("username or password incorrect"))
+      return  next(new ResponseError("username or password incorrect"))
     }
-    const  isMatch = await bcrypt.compare(password,user.password);
+    const  isMatch = await user.isPasswordMatch(password);
+    console.log(isMatch)
     if(!isMatch){
-        next(new ResponseError("username or password incorrect",StatusCodes.BAD_REQUEST))
+      return  next(new ResponseError("username or password incorrect",StatusCodes.BAD_REQUEST))
     }
-
-   return res.cookie("token",token).json({success:true,message:"ok"})
+      const token = user.SignJwtToken()
+      
+   return res.cookie("token",token).json({success:true,message:"ok",data:user})
     
    } catch (error) {
     next( new ResponseError(error.message,StatusCodes.BAD_REQUEST))

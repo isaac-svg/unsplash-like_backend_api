@@ -1,4 +1,4 @@
-require("dotenv").config()
+require("dotenv").config({path:"./.env"})
 const express = require("express")
 const app = express()
 const cors = require("cors")
@@ -9,7 +9,9 @@ const connectDB = require("./db/connect")
 
 
 // middlewares
-app.use(cors());
+app.use(cors({
+    credentials:true,
+}));
 app.use(express.json({limit:"50mb"}))
 app.use(bodyParser.json({limit:"50mb"}))
 app.use(bodyParser.urlencoded({limit:"50mb",extended:false}))
@@ -17,7 +19,7 @@ app.use(cookieParser());
 
 // route middlewares
 app.use("/auth",require("./routes/authRoute"))
-
+app.use("/myunsplash",require("./routes/imageRoute"))
 
 
 // server connection 
