@@ -20,6 +20,7 @@ app.use(cookieParser());
 // route middlewares
 app.use("/auth",require("./routes/authRoute"))
 app.use("/myunsplash",require("./routes/imageRoute"))
+app.use("/",require("./routes/general"))
 
 
 // server connection 

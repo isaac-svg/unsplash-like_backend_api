@@ -1,4 +1,6 @@
+const { StatusCodes } = require("http-status-codes")
 const mongoose =  require("mongoose")
+const ResponseError = require("../middlewares/error")
 
 
 
@@ -18,7 +20,21 @@ const ImageSchema =new  mongoose.Schema({
     }
 },{timestamps:true})
 
+ImageSchema.pre("save",function(next){
 
+        if(!this.isModified(["image","category"])){
+            return next(new ResponseError("No field is modified",StatusCodes.NO_CONTENT))
+        }
+        next();
+
+        // else{
+        //     const data = this.getUpdate();
+
+        //     this.findByIdAndUpdate(this._id,data,{new:true}).exec();
+        //     next()
+        // }
+
+})
 
 const Image = mongoose.model("Image",ImageSchema)
 
