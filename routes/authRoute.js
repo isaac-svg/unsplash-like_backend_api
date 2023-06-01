@@ -12,7 +12,7 @@ const router =  require("express").Router()
 
 router.route("/register").post(register)
 router.route("/login").post(login)
-router.route("/profile").post(verifyToken,profile)
+router.route("/profile").get(verifyToken,profile)
 
 
 
