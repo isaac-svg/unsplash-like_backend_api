@@ -8,8 +8,8 @@ async function register (req,res,next){
 
     const {username,password:pass,email} = req.body;
     try {
-       
-        const newUser =  new User({username,pass,email})
+       console.info(req.body)
+        const newUser =  new User({username,password:pass,email})
       const savedUser =   await newUser.save()
         const token = newUser.SignJwtToken();
         const {password,createdAt,updatedAt,...others} = savedUser

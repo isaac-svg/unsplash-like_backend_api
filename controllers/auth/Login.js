@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken")
 async function login (req,res,next){
 
    const {username,password} = req.body;
-  
+
    try {
     if(!username || !password){
       return  next(new ResponseError("Please provide username and password",StatusCodes.BAD_REQUEST))
@@ -23,7 +23,12 @@ async function login (req,res,next){
     }
       const token = user.SignJwtToken()
       
-   return res.cookie("token",token).json({success:true,message:"ok",data:user})
+    const payload = {
+      email:user["email"],
+      username:user["username"],
+      createdAt:user["createdAt"]
+    }
+   return res.cookie("token",token).json({success:true,message:"ok",payload})
     
    } catch (error) {
     next( new ResponseError(error.message,StatusCodes.BAD_REQUEST))

@@ -7,7 +7,14 @@ const uploadImage = require("../../utils/uploadToCloud");
 
 async function createPost(req,res,next){
         const { image,category} = req.body;
-        
+        console.log(req.body, "upload req.body  \n")
+        if(!image) {
+            return next(new ResponseError("Please upload an image",StatusCodes.NO_CONTENT));
+        }
+        if (!category){
+            return next(new ResponseError("Please specify image category ", StatusCodes.NO_CONTENT));
+        }
+
     try {
         console.log(typeof image)
             const url = await  uploadImage(image);
